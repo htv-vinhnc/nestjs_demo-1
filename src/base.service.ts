@@ -1,36 +1,39 @@
-// import { BaseEntity, DeleteResult, Repository } from 'typeorm'
-// import { IBaseService } from './i.base.service'
-// import { EntityId } from 'typeorm/repository/EntityId'
+import { BaseEntity, DeleteResult, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import { EntityId } from 'typeorm/repository/EntityId';
+import { IBaseService } from './i.base.service';
 
-// export class BaseService<T extends BaseEntity, R extends Repository<T>> implements IBaseService<T> {
-//   protected readonly repository: R
+export class BaseService<T extends BaseEntity, R extends Repository<T>> implements IBaseService<T> {
+  protected readonly repository: R;
 
-//   constructor(repository: R) {
-//     this.repository = repository
-//   }
+  constructor(repository: R) {
+    this.repository = repository;
+  }
+  findById(id: EntityId, options?: FindOneOptions<T>): Promise<T> {
+    throw new Error('Method not implemented.');
+  }
+  findByIds(id: [EntityId], options?: FindManyOptions<T>): Promise<T[]> {
+    throw new Error('Method not implemented.');
+  }
+  update(id: EntityId, data: any): Promise<T> {
+    throw new Error('Method not implemented.');
+  }
 
-//   index(): Promise<T[]> {
-//     return this.repository.find()
-//   }
+  async index(options?: FindManyOptions<T>): Promise<T[]> {
+    return await this.repository.find(options);
+  }
 
-//   findById(id: EntityId): Promise<T> {
-//     return this.repository.findOne(id)
-//   }
 
-//   findByIds(ids: [EntityId]): Promise<T[]> {
-//     return this.repository.findByIds(ids)
-//   }
 
-//   store(data: any): Promise<T> {
-//     return this.repository.save(data)
-//   }
+  // eslint-disable-next-line
+  async store(data: any): Promise<T> {
+    return await this.repository.save(data);
+  }
 
-//   async update(id: EntityId, data: any): Promise<T> {
-//     await this.repository.update(id, data)
-//     return this.findById(id)
-//   }
+  // eslint-disable-next-line
+  
 
-//   delete(id: EntityId): Promise<DeleteResult> {
-//     return this.repository.delete(id)
-//   }
-// }
+  async delete(id: EntityId): Promise<DeleteResult> {
+    return await this.repository.delete(id);
+  }
+}
+

@@ -5,12 +5,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StudentModule } from './student/student.module';
+import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
+    autoLoadEntities: true,
     type: 'mysql',
     host: '127.0.0.1',
     port: 3306,
@@ -19,7 +21,7 @@ import { AuthModule } from './auth/auth.module';
     database: 'nestjs_project',
     entities: [],
 }),
-StudentModule,
+UserModule,
 AuthModule
 ],
   controllers: [AppController, AuthController],

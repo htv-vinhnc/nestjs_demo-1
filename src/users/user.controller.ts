@@ -1,15 +1,16 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../auth/guards/auth/auth.guard';
 import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
-import { StudentService } from './student.service';
+import { UserService } from './user.service';
 
-@Controller('student')
-export class StudentController {
-    constructor (private readonly studentService: StudentService){}
-
-    // @Get()
-    // async getAllStudent(){
-    //     return this.studentService.getAllStudent();
-    // }
+@Controller('user')
+export class UserController {
+    constructor (private readonly userService: UserService){}
+    
+    @Get(':name')
+    async getTrue(@Param('name') name: string){
+        return this.userService.findAll(name);
+    }
 
     // @Get(':id')
     // async getOneStudent(@Param('id') id: number){
