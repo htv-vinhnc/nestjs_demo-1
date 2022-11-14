@@ -4,7 +4,7 @@ import { UserService } from '../../../users/user.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(@Inject()private readonly studentService: UserService){}
+    constructor(@Inject()private readonly userService: UserService){}
     canActivate(
       context: ExecutionContext,
     ): boolean | Promise<boolean> | Observable<boolean> {
@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
     }
 
     async validateRequest(requestBody: any): Promise<boolean>{
-        const user = await this.studentService.findAll(requestBody.username)
+        const user = await this.userService.getUserByEmail(requestBody.username)
         if (!user) return false;
         return true;
       }

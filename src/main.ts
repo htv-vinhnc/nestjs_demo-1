@@ -7,7 +7,7 @@ import { UserService } from './users/user.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.useGlobalGuards(new AuthGuard(new StudentService(Repository)));
+  // app.useGlobalGuards(new AuthGuard());
   await app.listen(3000);
 }
 bootstrap();

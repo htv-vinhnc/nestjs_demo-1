@@ -8,21 +8,22 @@ import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
+import { AuthGuard } from './auth/guards/auth/auth.guard';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-    autoLoadEntities: true,
     type: 'mysql',
-    host: '127.0.0.1',
+    host: 'localhost',
     port: 3306,
     username: 'root',
     password: 'Root8888',
     database: 'nestjs_project',
-    entities: [],
-}),
+    entities: [User],
+    synchronize: true,
+  }),
 UserModule,
-AuthModule
+AuthModule,
 ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService, JwtService],

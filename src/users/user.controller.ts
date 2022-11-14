@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Header, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth/guards/auth/auth.guard';
 import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
 import { UserService } from './user.service';
@@ -6,10 +6,10 @@ import { UserService } from './user.service';
 @Controller('user')
 export class UserController {
     constructor (private readonly userService: UserService){}
-    
-    @Get(':name')
-    async getTrue(@Param('name') name: string){
-        return this.userService.findAll(name);
+    @UseGuards(AuthGuard)
+    @Get()
+    async getTrue(@Body() input: {username: string}){
+        return this.userService.getUserByEmail(input.username);
     }
 
     // @Get(':id')
