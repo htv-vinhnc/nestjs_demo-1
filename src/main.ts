@@ -1,13 +1,11 @@
-import { NestFactory } from '@nestjs/core';
-import { Repository } from 'typeorm';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { AuthGuard } from './auth/guards/auth/auth.guard';
-import { User } from './users/user.entity';
-import { UserService } from './users/user.service';
+import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.useGlobalGuards(new AuthGuard());
+  const reflector = app.get(Reflector);
+  app.useGlobalGuards(new JwtAuthGuard(reflector));
   await app.listen(3000);
 }
 bootstrap();

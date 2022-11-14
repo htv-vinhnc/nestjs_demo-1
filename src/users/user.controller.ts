@@ -1,14 +1,16 @@
-import { Body, Controller, Delete, Get, Header, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../auth/guards/auth/auth.guard';
-import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
+import { Body, Controller, Get, UseGuards } from '@nestjs/common';
+import { Roles } from '../auth/guards/role-guard/roles.decorator';
+import { RolesGuard } from '../auth/guards/role-guard/roles.guard';
 import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
     constructor (private readonly userService: UserService){}
-    @UseGuards(AuthGuard)
+
+    @UseGuards(RolesGuard)
+    @Roles('user')
     @Get()
-    async getTrue(@Body() input: {username: string}){
+    async getUser(@Body() input: {username: string}){
         return this.userService.getUserByEmail(input.username);
     }
 

@@ -7,8 +7,13 @@ import { ALLOW_UNAUTHORIZED } from '../../../auth/constant/allow-unauthorized.co
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
     constructor(private readonly reflector: Reflector) {
-        super();
+      super();
+    }
+    
+    getRequest(context: ExecutionContext) {
+        return context.switchToHttp().getRequest<Request>();
       }
+    
       canActivate(context: ExecutionContext) {
         const allowUnauthorized = this.reflector.getAllAndOverride<boolean>(
           ALLOW_UNAUTHORIZED,

@@ -1,4 +1,3 @@
-import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
 import { UserController } from './user.controller';
@@ -10,5 +9,6 @@ import { User } from './user.entity';
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [UserService, JwtService],
+  exports: [UserService],
 })
 export class UserModule {}

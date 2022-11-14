@@ -8,7 +8,6 @@ import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
-import { AuthGuard } from './auth/guards/auth/auth.guard';
 
 @Module({
   imports: [
