@@ -1,17 +1,22 @@
 # syntax=docker/dockerfile:1
 
-FROM node:16.0.1-alpine
+FROM node:16.18.1-alpine
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
+# INSTALL SOURCE
+RUN set -eux apk add --no-cache yarn
+RUN yarn global add @nestjs/cli
+
 COPY package*.json ./
 COPY yarn.lock ./
 
-RUN set -eux apk add --no-cache yarn
+RUN yarn
 
-RUN yarn install
+# Copy source
+COPY ./ ./
 
 RUN yarn run build
 

@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  arangodb_db_container:
+    image: mysql:latest
+    container_name: arangodb_db_container
+    environment:
+      ARANGO_ROOT_PASSWORD: Root@123
+      #ARANGO_NO_AUTH: 1
+    ports:
+      - 9529:8529
+    volumes:
+      - /home/htv-thanhdh/_database/arragodb/data:/var/lib/arangodb3
+      - /home/htv-thanhdh/_database/arragodb/apps:/var/lib/arangodb3-apps
+
+  redmine_counter_api:
+    image: redmine-counter-api:latest
+    container_name: redmine_counter
+    depends_on:
+      - arangodb_db_container
+    restart: always
+    ports:
+      - 5101:5101
