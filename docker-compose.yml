@@ -1,23 +1,30 @@
-version: '3.7'
-
+version: "3.9"
+networks:
+  my_network:
+    driver: bridge
 services:
-  arangodb_db_container:
-    image: mysql:latest
-    container_name: arangodb_db_container
+  db:
+    image: mysql:8.0.31
+    networks:
+      - my_network
+    container_name: db
     environment:
-      ARANGO_ROOT_PASSWORD: Root@123
-      #ARANGO_NO_AUTH: 1
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_ROOT_PASSWORD: Root8888
+      MYSQL_DATABASE: nestjs_project
+      LANG: C.UTF-8
     ports:
-      - 9529:8529
+      - 3306:3306
     volumes:
-      - /home/htv-thanhdh/_database/arragodb/data:/var/lib/arangodb3
-      - /home/htv-thanhdh/_database/arragodb/apps:/var/lib/arangodb3-apps
-
-  redmine_counter_api:
-    image: redmine-counter-api:latest
-    container_name: redmine_counter
-    depends_on:
-      - arangodb_db_container
+      - C:/Users/htv-Vinhnc/Documents/mysql:/var/lib/mysql/
+  app:
+    build: 
+      dockerfile: ./Dockerfile
+    networks:
+      - my_network
+    container_name: app
     restart: always
-    ports:
-      - 5101:5101
+    depends_on:
+      - db
+    ports: 
+      - 3000:3000

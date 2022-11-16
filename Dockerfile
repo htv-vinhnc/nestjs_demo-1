@@ -14,7 +14,7 @@ COPY package*.json ./
 COPY yarn.lock ./
 
 RUN yarn
-
+RUN yarn add source-map-support
 # Copy source
 COPY ./ ./
 
