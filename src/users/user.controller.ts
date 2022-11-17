@@ -11,14 +11,14 @@ export class UserController {
     constructor (private readonly userService: UserService){}
 
     @UseGuards(RolesGuard)
-    @Roles('user')
+    @Roles('admin')
     @ApiResponse({
         status: 200,
         type: GetUserOutput,
     })
     @Get()
-    async getUser(@Body() input: {username: string}){
-        return this.userService.getUserByEmail(input.username);
+    async getUser(@Body() input: {email: string}){
+        return this.userService.getUserByEmail(input.email);
     }
 
     // @Get(':id')

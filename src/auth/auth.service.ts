@@ -10,12 +10,12 @@ export class AuthService {
     ) {};
 
   async validateUser(input: LoginInput) {
-    const user = await this.usersService.getUserByEmail(input.username);
+    const user = await this.usersService.getUserByEmail(input.email);
     
     if (user && user.password === input.password) {      
       const token = this.jwtService.sign(
         {
-          username: user.username,
+          email: user.email,
           password: user.password,
           role: user.role,
         },

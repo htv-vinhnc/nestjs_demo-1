@@ -13,7 +13,7 @@ import { User } from './users/user.entity';
   imports: [
     TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'db',
+    host: 'localhost',
     port: 3306,
     username: 'root',
     password: 'Root8888',
