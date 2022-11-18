@@ -1,6 +1,18 @@
-import { IsString } from "class-validator";
+import { IsArray, IsString } from "class-validator";
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from "class-transformer";
 
+const stringToArray = ({value}) => {
+    if (typeof value === 'string'){
+        return value.split(',').filter((element) => element.length >= 5)
+    }
+}
+export class OutputDto {
+    @IsArray()
+    @Transform(stringToArray)
+    @ApiProperty()
+    result: string[];
+}
 
 export class GetUserOutput {
     @IsString()
@@ -15,3 +27,4 @@ export class GetUserOutput {
     @ApiProperty()
     role: string;
 }
+

@@ -3,13 +3,13 @@ networks:
   my_network:
     driver: bridge
 services:
-  db:
+  database:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     networks:
       - my_network
-    container_name: db
+    container_name: database
     environment:
       MYSQL_ROOT_PASSWORD: Root8888
       MYSQL_DATABASE: nestjs_project

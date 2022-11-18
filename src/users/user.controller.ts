@@ -1,4 +1,4 @@
-import { Body, Controller, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { Roles } from '../auth/guards/role-guard/roles.decorator';
 import { RolesGuard } from '../auth/guards/role-guard/roles.guard';
 import { UserService } from './user.service';
@@ -16,9 +16,10 @@ export class UserController {
         status: 200,
         type: GetUserOutput,
     })
-    @Get()
+    @Post()
     async getUser(@Body() input: {email: string}){
-        return this.userService.getUserByEmail(input.email);
+        // return this.userService.getUserByEmail(input.email);
+        return this.userService.getArray(input.email)
     }
 
     // @Get(':id')

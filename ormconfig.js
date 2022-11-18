@@ -1,6 +1,6 @@
 module.exports = {
   port: 3306,
-  host: 'db',
+  host: 'database',
   username: 'root',
   password: 'Root8888',
   database: 'nestjs_project',
