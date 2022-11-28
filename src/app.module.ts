@@ -7,20 +7,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from './users/user.entity';
+import { DBconfig } from 'ormconfig';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-    type: 'mysql',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: 'Root8888',
-    database: 'nestjs_project',
-    entities: [User],
-    synchronize: true,
-  }),
+    TypeOrmModule.forRoot(DBconfig),
 UserModule,
 AuthModule,
 ],

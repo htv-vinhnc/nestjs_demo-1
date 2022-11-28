@@ -11,7 +11,9 @@ services:
       - my_network
     container_name: database
     environment:
-      MYSQL_ROOT_PASSWORD: Root8888
+      MYSQL_USER: vinhnc
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: nestjs_project
       LANG: C.UTF-8
     ports:

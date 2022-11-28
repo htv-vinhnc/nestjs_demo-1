@@ -18,8 +18,8 @@ export class UserController {
     })
     @Post()
     async getUser(@Body() input: {email: string}){
-        // return this.userService.getUserByEmail(input.email);
-        return this.userService.getArray(input.email)
+        return this.userService.getUserByEmail(input.email);
+        // return this.userService.getArray(input.email)
     }
 
     // @Get(':id')
