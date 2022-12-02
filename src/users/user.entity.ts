@@ -1,6 +1,6 @@
 import { IsEmail, IsEnum, IsInt, IsString } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Role } from "./user.contant";
+import { ROLE } from "./user.contant";
 
 @Entity('users')
 export class User {
@@ -26,6 +26,6 @@ export class User {
   phone: string;
 
   @Column()
-  @IsEnum(Role)
+  @IsEnum(ROLE)
   role: string;
 }
