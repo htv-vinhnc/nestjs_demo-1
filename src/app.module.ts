@@ -2,9 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './users/user.module';
+import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
@@ -19,10 +17,10 @@ import { getConnectionOptions } from 'typeorm';
         } as TypeOrmModuleOptions;
       },
     }),
-UserModule,
+UsersModule,
 AuthModule,
 ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, JwtService],
+  controllers: [AuthController],
+  providers: [AuthService, JwtService],
 })
 export class AppModule {}

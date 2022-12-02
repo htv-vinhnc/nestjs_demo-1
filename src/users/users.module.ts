@@ -1,9 +1,9 @@
 import { JwtService } from '@nestjs/jwt';
 import { Module } from '@nestjs/common';
-import { UserController } from './user.controller';
-import { UserService } from './user.service';
+import { UserController } from './users.controller';
+import { UserService } from './users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User } from './users.entity';
 import { OutputValidator } from './output.validator';
 
 @Module({
@@ -12,4 +12,4 @@ import { OutputValidator } from './output.validator';
   providers: [UserService, JwtService, OutputValidator],
   exports: [UserService],
 })
-export class UserModule {}
+export class UsersModule {}

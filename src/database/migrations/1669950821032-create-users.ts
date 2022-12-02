@@ -1,12 +1,13 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class createUsers11669887656911 implements MigrationInterface {
+export class createUsers1669950821032 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
             name: 'users',
             columns: [
                 {
+                    isNullable: false,
                     name: 'id',
                     type: 'int',
                     isPrimary: true,
@@ -14,30 +15,38 @@ export class createUsers11669887656911 implements MigrationInterface {
                     generationStrategy: 'increment',
                 },
                 {
+                    isNullable: false,
                     name: 'name',
                     type: 'varchar(60)',
                 },
                 {
+                    isNullable: false,
                     name: 'email',
                     type: 'varchar(60)',
                     isUnique: true,
                 },
                 {
+                    isNullable: false,
                     name: 'password',
                     type: 'varchar(60)',
                 },
                 {
+                    isNullable: false,
                     name: 'phone',
                     type: 'varchar(15)',
                     isUnique: true,
                 },
                 {
+                    isNullable: false,
                     name: 'role',
-                    type: 'varchar(15)',
+                    type: 'enum',
+                    enum: ['admin', 'user'],
                 },
                 {
                     name: 'created_at',
-                    type: 'timestamp',
+                    type: 'datetime(6)',
+                    default: 'CURRENT_TIMESTAMP(6)',
+                    isNullable: false,
                 },
             ]
         }))

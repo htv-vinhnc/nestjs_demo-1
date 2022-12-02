@@ -1,7 +1,10 @@
 import { LoginInput } from './dto/login.input';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../users/user.service';
+import { UserService } from '../users/users.service';
+import { RegisterInput } from './dto/register.input';
+import { User } from '../users/users.entity';
+import { ROLE } from '../users/users.constant';
 
 @Injectable()
 export class AuthService {
@@ -10,8 +13,7 @@ export class AuthService {
     ) {};
 
   async validateUser(input: LoginInput) {
-    const user = await this.usersService.getUserByEmail(input.email);
-    
+    const user = await this.usersService.getUserByEmail(input.email);    
     if (user && user.password === input.password) {      
       const token = this.jwtService.sign(
         {
@@ -27,5 +29,17 @@ export class AuthService {
       return token;
       }
     return null;
+  }
+
+  async register(input: RegisterInput): Promise<boolean>{
+    const user = await this.usersService.getUserByEmail(input.email);
+    if (user) {
+      throw new  HttpException(
+        'User is exist!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    await this.usersService.createUser(input)
+    return true;
   }
 }
