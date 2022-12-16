@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
+import { UploadFilesModule } from './upload-files/upload-files.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { getConnectionOptions } from 'typeorm';
     }),
 UsersModule,
 AuthModule,
+UploadFilesModule,
 ],
   controllers: [AuthController],
   providers: [AuthService, JwtService],

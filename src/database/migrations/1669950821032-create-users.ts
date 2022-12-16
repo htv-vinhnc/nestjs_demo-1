@@ -43,6 +43,17 @@ export class createUsers1669950821032 implements MigrationInterface {
                     enum: ['admin', 'user'],
                 },
                 {
+                    isNullable: false,
+                    name: 'active',
+                    type: 'enum',
+                    enum: ['true', 'false'],
+                },
+                {
+                    isNullable: true,
+                    name: 'avatar',
+                    type: 'varchar(260)',
+                },
+                {
                     name: 'created_at',
                     type: 'datetime(6)',
                     default: 'CURRENT_TIMESTAMP(6)',
